@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<h3>Autenticação</h3>
+
+<div class="ui card">
+    <div class="ui container">
+        <hr>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="ui primary button">Entrar</button>
+            <hr>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

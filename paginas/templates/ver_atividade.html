@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="ui fluid card">
+    <div class="content">
+        <div class="header"><h3>Atividade número {{ object.numero }}</h3></div>
+        <div class="meta">{{ object.campo }}</div>
+        <div class="description">
+            <p>{{ object.descricao }}</p>
+        </div>
+        <div class="description">
+            <p>{{ object.detalhes }}</p>
+        </div>
+    </div>
+    <div class="extra content">
+        <i class="check icon"></i>
+        Vale até {{ object.pontos }} pontos!
+    </div>
+</div>
+
+{% endblock %}

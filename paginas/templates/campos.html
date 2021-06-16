@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h2>Lista de Campos</h2>
+{% if request.user.is_authenticated %}
+<table class="ui celled table">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Opções</th>
+    </tr>
+    </thead>
+    {% for campo in object_list %}
+    <tbody>
+    <tr>
+        <td>{{campo.nome}}</td>
+        <td>{{campo.descricao}}</td>
+        <td>
+            <a href="{% url 'editarcampo' campo.id %}">
+                <button class="ui yellow mini button">
+                    <i class="redo alternate icon"></i></button>
+            </a>
+            <a href="{% url 'excluircampo' campo.id %}">
+                <button class="ui negative mini button">
+                    <i class="archive icon"></i></button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+{% else %}
+<table class="ui celled table">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+    </tr>
+    </thead>
+    {% for campo in object_list %}
+    <tbody>
+    <tr>
+        <td>{{campo.nome}}</td>
+        <td>{{campo.descricao}}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}

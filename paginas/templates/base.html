@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="ui attached menu">
+    <div class="ui container">
+        <a href="{% url 'home' %}" class="item">Django Escolar</a>
+        {% if request.user.is_authenticated %}
+        <div class="right menu">
+            <a href="" class="item">{{ request.user }}</a>
+            <a href="{% url 'logout' %}" class="item">Logout</a>
+        </div>
+        {% else %}
+        <div class="right menu">
+            <a href="{% url 'login' %}" class="item">Sign In</a>
+            <a class="item">Sign Up</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="ui container">
+    <div class="ui stackable grid">
+        <div class="four wide column">
+            <div class="ui vertical fluid menu">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'cadastraratividade' %}" class="item">
+                    Cadastrar Atividade
+                </a>
+                <a href="{% url 'cadastrarcampo' %}" class="item">
+                    Cadastrar Campo
+                </a>
+                <a href="{% url 'cadastrarprogressao' %}" class="item">
+                    Cadastrar Progressao
+                </a>
+                <a href="{% url 'listaratividades' %}" class="item">
+                    Listar Atividades
+                </a>
+                <a href="{% url 'listarcampos' %}" class="item">
+                    Listar Campos
+                </a>
+                <a href="{% url 'listarprogressoes' %}" class="item">
+                    Listar Progressoes
+                </a>
+                {% else %}
+                <a href="{% url 'listaratividades' %}" class="item">
+                    Listar Atividades
+                </a>
+                <a href="{% url 'listarcampos' %}" class="item">
+                    Listar Campos
+                </a>
+                <a href="{% url 'listarprogressoes' %}" class="item">
+                    Listar Progressoes
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="twelve wide column">
+            {% block conteudo %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
