@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block conteudo %}
 
 <h2>Lista de Atividades</h2>
+<div class="ui hidden divider"></div>
 {% if request.user.is_authenticated %}
-<table class="ui celled table">
+<table class="ui celled table" id="tabela-atividades">
     <thead>
     <tr>
-        <th>Número</th>
-        <th>Detalhes</th>
+        <th>Matéria</th>
         <th>Pontos</th>
+        <th>Professor</th>
         <th>Opções</th>
     </tr>
     </thead>
     {% for atividade in object_list %}
     <tbody>
     <tr>
-        <td>{{atividade.numero}}</td>
-        <td>{{atividade.detalhes}}</td>
+        <td>{{atividade.campo}}</td>
         <td>{{atividade.pontos}}</td>
+        <td>{{atividade.usuario}}</td>
         <td>
             <a href="{% url 'veratividade' atividade.id %}">
                 <button class="ui green mini button">
@@ -38,24 +40,98 @@
     {% endfor %}
 </table>
 {% else %}
-<table class="ui celled table">
+<table class="ui celled table" id="tabela-atividades2">
     <thead>
     <tr>
-        <th>Número</th>
-        <th>Detalhes</th>
+        <th>Matéria</th>
         <th>Pontos</th>
+        <th>Professor</th>
     </tr>
     </thead>
     {% for atividade in object_list %}
     <tbody>
     <tr>
-        <td>{{atividade.numero}}</td>
-        <td>{{atividade.detalhes}}</td>
+        <td>{{atividade.campo}}</td>
         <td>{{atividade.pontos}}</td>
+        <td>{{atividade.usuario}}</td>
     </tr>
     </tbody>
     {% endfor %}
 </table>
 {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery.mask.min.js' %}"></script>
+
+<script>
+
+    $(document).ready(function(){
+        $('#tabela-atividades').DataTable({
+        responsive: true,
+        // "bSort": false,
+        "aaSorting": [],
+        "pageLength": 10,
+        "language": {
+            "decimal": "",
+            "emptyTable": "Sem dados disponíveis",
+            "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+            "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+            "infoFiltered": "(filtrado de _MAX_ registos no total)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ registos",
+            "loadingRecords": "A carregar dados...",
+            "processing": "A processar...",
+            "search": "Procurar:",
+            "zeroRecords": "Não foram encontrados resultados",
+            "paginate": {
+                "first": "Primeiro",
+                "last": "Último",
+                "next": "Seguinte",
+                "previous": "Anterior"
+            },
+            "aria": {
+                "sortAscending": ": ordem crescente",
+                "sortDescending": ": ordem decrescente"
+            }
+        }
+    });
+
+
+        $('#tabela-atividades2').DataTable({
+        responsive: true,
+        // "bSort": false,
+        "aaSorting": [],
+        "pageLength": 10,
+        "language": {
+            "decimal": "",
+            "emptyTable": "Sem dados disponíveis",
+            "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+            "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+            "infoFiltered": "(filtrado de _MAX_ registos no total)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ registos",
+            "loadingRecords": "A carregar dados...",
+            "processing": "A processar...",
+            "search": "Procurar:",
+            "zeroRecords": "Não foram encontrados resultados",
+            "paginate": {
+                "first": "Primeiro",
+                "last": "Último",
+                "next": "Seguinte",
+                "previous": "Anterior"
+            },
+            "aria": {
+                "sortAscending": ": ordem crescente",
+                "sortDescending": ": ordem decrescente"
+            }
+        }
+    });
+    });
+
+</script>
 
 {% endblock %}

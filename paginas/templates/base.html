@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 
 <html>
@@ -9,22 +10,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.10.25/datatables.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 
 <body>
 
-<div class="ui attached menu">
+<div class="ui attached inverted menu">
     <div class="ui container">
         <a href="{% url 'home' %}" class="item">Django Escolar</a>
         {% if request.user.is_authenticated %}
         <div class="right menu">
-            <a href="" class="item">{{ request.user }}</a>
+            <a href="{% url 'atualizar-dados' %}" class="item">{{ request.user }}</a>
             <a href="{% url 'logout' %}" class="item">Logout</a>
         </div>
         {% else %}
         <div class="right menu">
             <a href="{% url 'login' %}" class="item">Sign In</a>
-            <a class="item">Sign Up</a>
+            <a href="{% url 'registrar' %}" class="item">Sign Up</a>
         </div>
         {% endif %}
     </div>
@@ -37,43 +41,70 @@
         <div class="four wide column">
             <div class="ui vertical fluid menu">
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'cadastraratividade' %}" class="item">
+                <a href="{% url 'cadastraratividade' %}" class="active item">
                     Cadastrar Atividade
                 </a>
-                <a href="{% url 'cadastrarcampo' %}" class="item">
-                    Cadastrar Campo
-                </a>
-                <a href="{% url 'cadastrarprogressao' %}" class="item">
-                    Cadastrar Progressao
+                <a href="{% url 'cadastrarcampo' %}" class="active item">
+                    Cadastrar Matéria
                 </a>
                 <a href="{% url 'listaratividades' %}" class="item">
                     Listar Atividades
                 </a>
                 <a href="{% url 'listarcampos' %}" class="item">
-                    Listar Campos
-                </a>
-                <a href="{% url 'listarprogressoes' %}" class="item">
-                    Listar Progressoes
+                    Listar Matérias
                 </a>
                 {% else %}
                 <a href="{% url 'listaratividades' %}" class="item">
                     Listar Atividades
                 </a>
                 <a href="{% url 'listarcampos' %}" class="item">
-                    Listar Campos
-                </a>
-                <a href="{% url 'listarprogressoes' %}" class="item">
-                    Listar Progressoes
+                    Listar Matérias
                 </a>
                 {% endif %}
             </div>
         </div>
         <div class="twelve wide column">
-            {% block conteudo %}
-            {% endblock %}
+            <div class="ui container">
+                {% block conteudo %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 </div>
+
+<div class="ui hidden divider"></div>
+
+
+<footer>
+    <div class="ui inverted attached segment">
+        <div class="ui inverted relaxed divided list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">Rafael José</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <a href="//github.com/rafael-jose">Github</a>
+                </div>
+                <div class="content">
+                    <a href="//instagram.com/rafael.jose_">Instagram</a>
+                </div>
+                <div class="content">
+                    <a href="//rafaeljoses.epizy.com/">Contrate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.25/datatables.min.js"></script>
+
+{% block scripts %}
+
+{% endblock %}
 
 </body>
 

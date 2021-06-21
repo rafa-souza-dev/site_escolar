@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block conteudo %}
-Página inicial
+
+<h2>Página Inicial</h2>
+<div class="ui hidden divider"></div>
+
+{% if request.user.is_authenticated %}
+
+{% if user.perfil.nome_completo %}
+<h4>Bem vindo ao Django Escolar, {{ user.perfil.nome_completo }}!</h4>
+{% else %}
+<h4>Olá! Você precisa completar o seu cadastro...</h4>
+<h4>Entre em <a href="{% url 'atualizar-dados' %}">meus dados</a> para se atualizar.</h4>
+{% endif %}
+
+{% else %}
+<h4>Bem vindo ao Django Escolar!</h4>
+<h4>Você pode iniciar seu cadastro clicando <a href="{% url 'registrar' %}">aqui.</a></h4>
+
+{% endif %}
+
 {% endblock %}
