@@ -15,8 +15,8 @@
         <th>Opções</th>
     </tr>
     </thead>
-    {% for atividade in object_list %}
     <tbody>
+    {% for atividade in object_list %}
     <tr>
         <td>{{atividade.campo}}</td>
         <td>{{atividade.pontos}}</td>
@@ -36,8 +36,8 @@
             </a>
         </td>
     </tr>
-    </tbody>
     {% endfor %}
+    </tbody>
 </table>
 {% else %}
 <table class="ui celled table" id="tabela-atividades2">
@@ -48,15 +48,15 @@
         <th>Professor</th>
     </tr>
     </thead>
-    {% for atividade in object_list %}
     <tbody>
+    {% for atividade in object_list %}
     <tr>
         <td>{{atividade.campo}}</td>
         <td>{{atividade.pontos}}</td>
         <td>{{atividade.usuario}}</td>
     </tr>
-    </tbody>
     {% endfor %}
+    </tbody>
 </table>
 {% endif %}
 

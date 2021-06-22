@@ -14,8 +14,8 @@
         <th>Opções</th>
     </tr>
     </thead>
-    {% for campo in object_list %}
     <tbody>
+    {% for campo in object_list %}
     <tr>
         <td>{{campo.nome}}</td>
         <td>{{campo.descricao}}</td>
@@ -30,8 +30,8 @@
             </a>
         </td>
     </tr>
-    </tbody>
     {% endfor %}
+    </tbody>
 </table>
 {% else %}
 <table class="ui celled table" id="tabela-campos2">
@@ -41,14 +41,14 @@
         <th>Descrição</th>
     </tr>
     </thead>
-    {% for campo in object_list %}
     <tbody>
+    {% for campo in object_list %}
     <tr>
         <td>{{campo.nome}}</td>
         <td>{{campo.descricao}}</td>
     </tr>
-    </tbody>
     {% endfor %}
+    </tbody>
 </table>
 {% endif %}
 
